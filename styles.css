@@ -1,4 +1,4 @@
-/* General resets and typography */
+
 body, html {
     margin: 0;
     padding: 0;
@@ -7,7 +7,7 @@ body, html {
     color: #333;
 }
 
-/* Header styling */
+
 header {
     background-color: #0056b3;
     color: #ffffff;
@@ -23,7 +23,7 @@ header h1 {
     font-size: 24px;
 }
 
-/* Dashboard container and navigation styling */
+
 .dashboard-container {
     max-width: 960px;
     margin: 20px auto;
@@ -59,7 +59,7 @@ nav ul li button:hover, nav ul li button.active {
     border-bottom: 3px solid #0056b3;
 }
 
-/* Section display styling */
+
 .section {
     display: none;
 }
@@ -68,7 +68,7 @@ nav ul li button:hover, nav ul li button.active {
     display: block;
 }
 
-/* Form and button styling */
+
 button, input[type="submit"] {
     background-color: #007bff;
     color: white;
@@ -98,7 +98,7 @@ label {
     font-weight: bold;
 }
 
-/* Responsive design adjustments */
+
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;

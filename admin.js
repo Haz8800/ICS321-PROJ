@@ -17,5 +17,5 @@ function showSection(sectionId) {
 
 function logout() {
     console.log('Logging out...');
-    window.location.href = 'mainpage.html'; // Redirect back to login page
+    window.location.href = 'mainpage.html'; 
 }
