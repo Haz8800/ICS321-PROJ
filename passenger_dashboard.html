@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Dashboard - Flight Reservation System</title>
+    <link rel="stylesheet" href="passenger.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Your Dashboard</h1>
+        <button onclick="logout()">Logout</button>
+    </header>
+    <div class="dashboard-container">
+        <nav>
+            <ul>
+                <li><button onclick="showSection('manage-tickets')">Manage Tickets</button></li>
+                <li><button onclick="showSection('search-flights')">Book Flights</button></li>
+                <li><button onclick="showSection('make-payments')">Make Payments</button></li>
+            </ul>
+        </nav>
+        <section id="manage-tickets" class="section">
+            <h2>Manage Your Tickets</h2>
+            <!-- Content for managing tickets will go here -->
+        </section>
+        <section id="search-flights" class="section hidden">
+            <h2>Book Flights</h2>
+            <!-- Content for searching and booking flights will go here, including seat selection -->
+        </section>
+        <section id="make-payments" class="section hidden">
+            <h2>Make Payments</h2>
+            <!-- Content for making payments will go here -->
+        </section>
+    </div>
+    <script src="passenger.js"></script>
+</body>
+</html>
