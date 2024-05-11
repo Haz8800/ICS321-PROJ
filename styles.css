@@ -1,0 +1,115 @@
+/* General resets and typography */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header styling */
+header {
+    background-color: #0056b3;
+    color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Dashboard container and navigation styling */
+.dashboard-container {
+    max-width: 960px;
+    margin: 20px auto;
+    background: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin: 0 0 20px 0;
+    border-bottom: 2px solid #eee;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li button {
+    background: none;
+    border: none;
+    color: #0056b3;
+    font-size: 16px;
+    padding: 10px 0;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+
+nav ul li button:hover, nav ul li button.active {
+    border-bottom: 3px solid #0056b3;
+}
+
+/* Section display styling */
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* Form and button styling */
+button, input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+input[type="text"], input[type="date"], select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+label {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin-bottom: 10px;
+    }
+
+    .dashboard-container {
+        padding: 10px;
+    }
+}
