@@ -1,19 +1,76 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
+const { supabase } = require('./supabaseClient');
+
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
+ 
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
+    try {
+        
+        const { data: personData, error: personError } = await supabase
+            .from('person')
+            .select('userid, password') 
+            .eq('username', username)
+            .single();
 
-    console.log('Logging in with:', username, password);
+        if (personError) {
+            throw new Error('Login failed: ' + personError.message);
+        }
+
+      
+        console.log('Person data:', personData);
+
+       
+        if (personData.password !== password) {
+            throw new Error('Invalid password');
+        }
+
+        
+        const userId = personData.userid; 
+        console.log('User ID:', userId);  
+
+        if (!userId) {
+            throw new Error('User ID is undefined or not retrieved properly');
+        }
+
+       
+        const { data: passengerData, error: passengerError } = await supabase
+            .from('passenger')
+            .select('userid')
+            .eq('userid', userId)
+            .maybeSingle();  
+
+        if (passengerError) {
+            throw new Error('Error checking passenger role: ' + passengerError.message);
+        }
+
+        if (passengerData) {
+            window.location.href = 'passenger_dashboard.html';  
+            return;
+        }
+
+        
+        const { data: adminData, error: adminError } = await supabase
+            .from('admin')
+            .select('userid')
+            .eq('userid', userId)
+            .maybeSingle(); 
+
+        if (adminError) {
+            throw new Error('Error checking admin role: ' + adminError.message);
+        }
+
+        if (adminData) {
+            window.location.href = 'admin_dashboard.html';  
+            return;
+        }
 
     
-  
-    if (username === 'admin' && password === 'adminpass') {
-        window.location.href = 'admin_dashboard.html';
-    } else if (username === 'user' && password === 'userpass') {
-        window.location.href = 'passenger_dashboard.html'; 
-    } else {
-        alert('Invalid credentials!');
+        throw new Error('Login failed: User role not determined');
+    } catch (error) {
+        console.error('Login process error:', error);
+        alert(error.message);
     }
 });
