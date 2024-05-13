@@ -1,0 +1,79 @@
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4; /* Light grey background */
+    background-image: url('/1.106c6bd6.jpg'); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centering the content vertically and horizontally */
+}
+
+/* Styling for the registration container */
+.register-container {
+    background: white; /* White background for the form */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 100%;
+    max-width: 400px; /* Maximum width with responsive design */
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: #333; /* Dark grey color for text */
+    font-size: 14px; /* Appropriate font size for readability */
+    margin-bottom: 5px; /* Space between label and input */
+    display: block; /* Ensures the label takes the full width */
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="tel"] {
+    padding: 10px;
+    margin-bottom: 15px; /* Space between each form field */
+    border: 1px solid #ccc; /* Subtle border for the inputs */
+    border-radius: 4px; /* Rounded borders for the inputs */
+    width: calc(100% - 22px); /* Full width taking padding and border into account */
+}
+
+button {
+    padding: 10px;
+    background-color: #0056b3; /* Blue background for the button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer; /* Hand cursor on hover */
+    margin-top: 10px; /* Space above the button */
+}
+
+button:hover {
+    background-color: #004494; /* Slightly darker blue on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .register-container {
+        padding: 15px;
+        margin: 10px; /* Smaller padding and margin on smaller screens */
+    }
+}
+
+
+/*# sourceMappingURL=/register.0e5eaad2.css.map */

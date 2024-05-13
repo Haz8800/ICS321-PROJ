@@ -1,5 +1,7 @@
 // Assuming supabaseClient.js has been set up correctly with CommonJS style
-const { supabase } = require('./supabaseClient');
+    const { supabase } = require('./supabaseClient');
+
+
 
 document.getElementById('registerForm').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -13,7 +15,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         fname: formData.get('firstname'),
         mname: formData.get('middlename'),
         lname: formData.get('lastname'),
-        password: formData.get('password'), // Consider hashing this password before storing
+        password: formData.get('password'), 
         passportno: formData.get('passportno')
     };
 
@@ -28,7 +30,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
                 fname: userData.fname,
                 mname: userData.mname,
                 lname: userData.lname,
-                password: userData.password // Make sure to hash passwords in a real application!
+                password: userData.password 
             }]);
 
         if (personError) throw personError;
@@ -47,7 +49,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         if (passengerError) throw passengerError;
 
         alert('Registration successful!');
-        window.location.href = 'login.html'; // Redirect back to the login page
+        window.location.href = 'login.html';
     } catch (error) {
         console.error('Registration failed:', error);
         alert('Failed to register. Please try again.');
