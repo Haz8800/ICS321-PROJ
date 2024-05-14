@@ -4,7 +4,7 @@ const { supabase } = require('./supabaseClient');
 async function fetchUsers() {
     try {
         const { data, error } = await supabase
-            .from('Ticket')  // Ensure 'users' is a valid table in your Supabase project
+            .from('Ticket')  
             .select('*');
 
         if (error) {

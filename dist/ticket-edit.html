@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Ticket - Admin Dashboard</title>
+    <link rel="stylesheet" href="/ticket.a12e5cf5.css">
+<script src="/ticket.a12e5cf5.js"></script></head>
+<body>
+    <header>
+        <h1>Edit Ticket</h1>
+        <button onclick="location.href='admin-dashboard.html'">Back to Dashboard</button>
+    </header>
+    <div class="form-container">
+        <form id="edit-form">
+            <label for="ticketId">Select Ticket:</label>
+            <select id="ticketId" name="ticketId" required="">
+                <option value="">Select a Ticket...</option>
+            </select>
+
+            <label for="userId">User ID:</label>
+            <input type="text" id="userId" name="userId" required="">
+
+            <label for="ticketStatus">Ticket Status:</label>
+            <select id="ticketStatus" name="ticketStatus" required="">
+                <option value="1">Confirmed</option>
+                <option value="2">Waitlisted</option>
+                <option value="3">Cancelled</option>
+            </select>
+
+            <label for="seatId">Seat ID:</label>
+            <input type="text" id="seatId" name="seatId" required="">
+
+            <label for="flightId">Flight ID:</label>
+            <input type="text" id="flightId" name="flightId" required="">
+
+            <input type="submit" value="Update Ticket">
+            <input type="button" value="Remove Ticket" id="removeTicket" onclick="removeTicket();">
+        </form>
+    </div>
+
+    <script src="/ticket-edit.0d7f59a4.js"></script>
+</body>
+</html>

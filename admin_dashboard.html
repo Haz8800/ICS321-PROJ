@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Flight Reservation System</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
     <header>
@@ -12,31 +12,18 @@
         <button onclick="location.href='mainpage.html'">Logout</button>
     </header>
     <div class="dashboard-container">
-        <nav>
-            <ul>
-                <li><button onclick="showSection('ticket-management')">Ticket Management</button></li>
-                <li><button onclick="showSection('seat-booking')">Seat Booking</button></li>
-                <li><button onclick="showSection('report-generation')">Report Generation</button></li>
-                <li><button onclick="showSection('waitlist-management')">Waitlist Management</button></li>
-            </ul>
-        </nav>
-        <section id="ticket-management" class="section">
+        <div>
             <h2>Ticket Management</h2>
-           
-        </section>
-        <section id="seat-booking" class="section hidden">
-            <h2>Seat Booking</h2>
-          
-        </section>
-        <section id="report-generation" class="section hidden">
+            <button onclick="location.href='ticket-insert.html'">Add New Ticket</button>
+            <button onclick="location.href='ticket-edit.html'">Edit Existing Ticket</button>
+        </div>
+        <div>
             <h2>Report Generation</h2>
-          
-        </section>
-        <section id="waitlist-management" class="section hidden">
+        </div>
+        <div>
             <h2>Waitlist Management</h2>
-          
-        </section>
+        </div>
     </div>
-    <script src="admin.js"></script>
+
 </body>
 </html>

@@ -118,24 +118,28 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"admin.js":[function(require,module,exports) {
-document.querySelectorAll('nav ul li button').forEach(function (btn) {
-  btn.addEventListener('click', function () {
-    document.querySelectorAll('nav ul li button').forEach(function (button) {
-      button.classList.remove('active');
-    });
-    this.classList.add('active');
-    showSection(this.getAttribute('onclick').split("'")[1]);
-  });
+document.addEventListener('DOMContentLoaded', function () {
+  setupNavigation();
 });
+function setupNavigation() {
+  var buttons = document.querySelectorAll('nav ul li button');
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      var sectionId = this.id.replace('-btn', '');
+      showSection(sectionId);
+    });
+  });
+}
 function showSection(sectionId) {
   document.querySelectorAll('.section').forEach(function (section) {
     section.classList.add('hidden');
   });
-  document.getElementById(sectionId).classList.remove('hidden');
-}
-function logout() {
-  console.log('Logging out...');
-  window.location.href = 'mainpage.html';
+  var activeSection = document.getElementById(sectionId);
+  if (activeSection) {
+    activeSection.classList.remove('hidden');
+  } else {
+    console.error('No section found with ID:', sectionId);
+  }
 }
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -162,7 +166,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52999" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51712" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
