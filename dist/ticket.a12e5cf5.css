@@ -51,13 +51,13 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-input[type="button"]#removeTicket { /* Specific styling for the remove button */
-    background-color: #dc3545; /* Bootstrap danger color for emphasis */
-    margin-top: 10px; /* Extra spacing to distinguish from update button */
+input[type="button"]#removeTicket { 
+    background-color: #dc3545;
+    margin-top: 10px; 
 }
 
 input[type="button"]#removeTicket:hover {
-    background-color: #c82333; /* Darker shade on hover */
+    background-color: #c82333; 
 }
 
 @media (max-width: 768px) {

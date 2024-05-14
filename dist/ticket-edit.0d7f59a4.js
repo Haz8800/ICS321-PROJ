@@ -8890,7 +8890,7 @@ function _loadTicketIDs() {
           throw error;
         case 8:
           selectElement = document.getElementById('ticketId');
-          selectElement.innerHTML = '<option value="">Select a Ticket...</option>'; // Clear previous options
+          selectElement.innerHTML = '<option value="">Select a Ticket...</option>';
           data.forEach(function (ticket) {
             var option = document.createElement('option');
             option.value = ticket.Ticket_ID;
@@ -9034,7 +9034,7 @@ function _removeTicket() {
           throw error;
         case 10:
           alert('Ticket successfully removed!');
-          loadTicketIDs(); // Reload the ticket IDs to reflect the removal
+          loadTicketIDs();
           _context4.next = 18;
           break;
         case 14:
@@ -9051,11 +9051,7 @@ function _removeTicket() {
   return _removeTicket.apply(this, arguments);
 }
 function init() {
-  // Load all ticket IDs into the dropdown when the page loads
   loadTicketIDs();
-
-  // Set up event listener for changes to the ticket selection dropdown.
-  // This loads the selected ticket's details into the form fields.
   var ticketSelect = document.getElementById('ticketId');
   ticketSelect.addEventListener('change', function () {
     if (this.value) {
@@ -9063,31 +9059,22 @@ function init() {
       loadTicketData(this.value);
     }
   });
-
-  // Handle form submission for updating ticket details.
-  // Prevents the default form submission and calls the updateTicket function.
   var form = document.getElementById('edit-form');
   form.addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault();
     console.log("Updating ticket...");
     updateTicket();
   });
-
-  // Set up event listener for the 'Remove Ticket' button.
-  // Calls the removeTicket function when the button is clicked.
   var removeButton = document.getElementById('removeTicket');
   removeButton.addEventListener('click', function () {
     console.log("Attempting to remove ticket...");
     removeTicket();
   });
 }
-
-// Ensure the init function is called when the document is fully loaded.
-// This checks if the document is ready and initializes accordingly.
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init); // Wait for the full content to load
+  document.addEventListener('DOMContentLoaded', init);
 } else {
-  init(); // If the content is already loaded, initialize immediately
+  init();
 }
 },{"./supabaseClient":"supabaseClient.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -9114,7 +9101,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53743" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54286" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
