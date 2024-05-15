@@ -1,4 +1,4 @@
-// fetchData.js
+
 const { supabase } = require('./supabaseClient');
 
 async function fetchUsers() {
@@ -18,5 +18,5 @@ async function fetchUsers() {
     }
 }
 
-// Call the function to test it
+
 fetchUsers();
