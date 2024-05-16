@@ -1,4 +1,4 @@
-
+/* Basic Reset and Font Settings */
 body, html {
     margin: 0;
     padding: 0;
@@ -7,15 +7,16 @@ body, html {
     color: #333;
 }
 
-
+/* Header Styling */
 header {
     background-color: #0056b3;
-    color: #ffffff;
+    color: white;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative; /* Ensures proper positioning context */
 }
 
 header h1 {
@@ -23,53 +24,78 @@ header h1 {
     font-size: 24px;
 }
 
+/* Small logout button in the top-right corner */
+header button.logout {
+    padding: 5px 8px;
+    font-size: 12px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
+header button.logout:hover {
+    background-color: #0056b3;
+}
+
+/* Dashboard container styling */
 .dashboard-container {
-    max-width: 960px;
+    max-width: 600px;
     margin: 20px auto;
-    background: #ffffff;
+    background: white;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     border-radius: 8px;
     padding: 20px;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    margin: 0 0 20px 0;
-    border-bottom: 2px solid #eee;
-}
-
-nav ul li {
-    margin-right: 20px;
-}
-
-nav ul li button {
-    background: none;
-    border: none;
+/* Section Titles */
+h2 {
     color: #0056b3;
-    font-size: 16px;
-    padding: 10px 0;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
+    margin-bottom: 10px;
 }
 
-nav ul li button:hover, nav ul li button.active {
-    border-bottom: 3px solid #0056b3;
-}
-
-
-.section {
-    display: none;
-}
-
-.section.active {
+/* Labels and Form Elements */
+label {
     display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="text"]#ticketStatus {
+    width: 100%;  /* Ensures it matches the width of dropdowns */
+    padding: 8px; /* Aligns with the padding of select elements */
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #e9ecef; /* Gives a distinct background */
+    color: #495057; /* Ensures text is clearly visible */
+    cursor: not-allowed; /* Shows that the input is not editable */
+    display: block; /* Makes sure the input is not inline */
+    font-size: 16px; /* Matches font size of select elements */
+}
+
+/* Make sure all select and input elements are styled uniformly */
+select, input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Additional specific targeting to override any unwanted styles */
+input[type="text"].status-input {
+    background-color: #e9ecef; /* Consistent background color */
+    font-size: 16px; /* Consistent font size */
 }
 
 
-button, input[type="submit"] {
+
+/* Buttons Styling */
+button {
     background-color: #007bff;
     color: white;
     padding: 10px 15px;
@@ -77,38 +103,25 @@ button, input[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    width: auto; /* Allows button width to fit content */
 }
 
-button:hover, input[type="submit"]:hover {
+button:hover {
     background-color: #0056b3;
 }
 
-input[type="text"], input[type="date"], select {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+.cancel-button {
+    background-color: #d9534f;
+    margin-left: 10px; /* Spacing between buttons */
 }
 
-label {
-    margin-top: 15px;
-    font-weight: bold;
+.cancel-button:hover {
+    background-color: #c9302c;
 }
 
-
+/* Responsive Design */
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    nav ul li {
-        margin-bottom: 10px;
-    }
-
     .dashboard-container {
         padding: 10px;
     }

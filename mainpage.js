@@ -3,15 +3,14 @@ const { supabase } = require('./supabaseClient');
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
- 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
     try {
-        
+   
         const { data: personData, error: personError } = await supabase
             .from('person')
-            .select('userid, password') 
+            .select('userid, password')
             .eq('username', username)
             .single();
 
@@ -19,27 +18,21 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             throw new Error('Login failed: ' + personError.message);
         }
 
-      
         console.log('Person data:', personData);
 
-       
+      
         if (personData.password !== password) {
             throw new Error('Invalid password');
         }
 
-        
-        const userId = personData.userid; 
-        console.log('User ID:', userId);  
+        sessionStorage.setItem('userId', personData.userid);
+        console.log('User ID:', personData.userid);
 
-        if (!userId) {
-            throw new Error('User ID is undefined or not retrieved properly');
-        }
-
-       
+  
         const { data: passengerData, error: passengerError } = await supabase
             .from('passenger')
             .select('userid')
-            .eq('userid', userId)
+            .eq('userid', personData.userid)
             .maybeSingle();  
 
         if (passengerError) {
@@ -51,11 +44,10 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             return;
         }
 
-        
         const { data: adminData, error: adminError } = await supabase
             .from('admin')
             .select('userid')
-            .eq('userid', userId)
+            .eq('userid', personData.userid)
             .maybeSingle(); 
 
         if (adminError) {
@@ -67,7 +59,6 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             return;
         }
 
-    
         throw new Error('Login failed: User role not determined');
     } catch (error) {
         console.error('Login process error:', error);

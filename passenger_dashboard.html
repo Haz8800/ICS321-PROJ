@@ -3,35 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passenger Dashboard - Flight Reservation System</title>
+    <title>Passenger Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to Your Dashboard</h1>
-        <button onclick="location.href='mainpage.html'">Logout</button>
+        <h1>Passenger Dashboard</h1>
+        <button onclick="logout()">logout</button>
     </header>
     <div class="dashboard-container">
-        <nav>
-            <ul>
-                <li><button onclick="showSection('manage-tickets')">Manage Tickets</button></li>
-                <li><button onclick="showSection('search-flights')">Book Flights</button></li>
-                <li><button onclick="showSection('make-payments')">Make Payments</button></li>
-            </ul>
-        </nav>
-        <section id="manage-tickets" class="section">
-            <h2>Manage Your Tickets</h2>
-          
-        </section>
-        <section id="search-flights" class="section hidden">
-            <h2>Book Flights</h2>
-           
-        </section>
-        <section id="make-payments" class="section hidden">
-            <h2>Make Payments</h2>
-       
-        </section>
+        <h2>Reservation</h2>
+        <label for="takeOffCity">Take-off City:</label>
+        <select id="takeOffCity"></select>
+
+        <label for="arrivalCity">Arrival City:</label>
+        <select id="arrivalCity"></select>
+
+        <label for="takeOffDate">Take-off Date:</label>
+        <select id="takeOffDate"></select>
+
+        <label for="takeOffTime">Take-off Time:</label>
+        <select id="takeOffTime"></select>
+
+        <label for="seatSelect">Seat Selection:</label>
+        <select id="seatSelect"></select>
+
+        <button id="reserveButton">Reserve</button>
+
+        <h2>Ticket Management</h2>
+        <label for="userTicketsSelect">Your Tickets:</label>
+        <select id="userTicketsSelect"></select>
+
+        <label for="ticketTime">Takeoff Time:</label>
+        <select id="ticketTime"></select>
+
+        <label for="ticketStatus">Ticket Status:</label>
+        <input type="text" id="ticketStatus" class="status-input" disabled>
+
+
+        <label for="seatUpdateSelect">Seat Selection:</label>
+        <select id="seatUpdateSelect"></select>
+
+        <button id="updateTicketButton">Update Ticket</button>
+        <button id="cancelTicketButton" class="cancel-button">Cancel Ticket</button>
     </div>
+
     <script src="passenger.js"></script>
 </body>
 </html>

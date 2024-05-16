@@ -8870,7 +8870,7 @@ var _require = require('./supabaseClient'),
   supabase = _require.supabase;
 document.getElementById('loginForm').addEventListener('submit', /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(event) {
-    var username, password, _yield$supabase$from$, personData, personError, userId, _yield$supabase$from$2, passengerData, passengerError, _yield$supabase$from$3, adminData, adminError;
+    var username, password, _yield$supabase$from$, personData, personError, _yield$supabase$from$2, passengerData, passengerError, _yield$supabase$from$3, adminData, adminError;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -8891,69 +8891,68 @@ document.getElementById('loginForm').addEventListener('submit', /*#__PURE__*/fun
           throw new Error('Login failed: ' + personError.message);
         case 11:
           console.log('Person data:', personData);
+
+          // Verifying password
           if (!(personData.password !== password)) {
             _context.next = 14;
             break;
           }
           throw new Error('Invalid password');
         case 14:
-          userId = personData.userid;
-          console.log('User ID:', userId);
-          if (userId) {
-            _context.next = 18;
-            break;
-          }
-          throw new Error('User ID is undefined or not retrieved properly');
+          // Storing userId in session storage for further use
+          sessionStorage.setItem('userId', personData.userid);
+          console.log('User ID:', personData.userid);
+
+          // Determining if the user is a passenger
+          _context.next = 18;
+          return supabase.from('passenger').select('userid').eq('userid', personData.userid).maybeSingle();
         case 18:
-          _context.next = 20;
-          return supabase.from('passenger').select('userid').eq('userid', userId).maybeSingle();
-        case 20:
           _yield$supabase$from$2 = _context.sent;
           passengerData = _yield$supabase$from$2.data;
           passengerError = _yield$supabase$from$2.error;
           if (!passengerError) {
-            _context.next = 25;
+            _context.next = 23;
             break;
           }
           throw new Error('Error checking passenger role: ' + passengerError.message);
-        case 25:
+        case 23:
           if (!passengerData) {
-            _context.next = 28;
+            _context.next = 26;
             break;
           }
           window.location.href = 'passenger_dashboard.html';
           return _context.abrupt("return");
+        case 26:
+          _context.next = 28;
+          return supabase.from('admin').select('userid').eq('userid', personData.userid).maybeSingle();
         case 28:
-          _context.next = 30;
-          return supabase.from('admin').select('userid').eq('userid', userId).maybeSingle();
-        case 30:
           _yield$supabase$from$3 = _context.sent;
           adminData = _yield$supabase$from$3.data;
           adminError = _yield$supabase$from$3.error;
           if (!adminError) {
-            _context.next = 35;
+            _context.next = 33;
             break;
           }
           throw new Error('Error checking admin role: ' + adminError.message);
-        case 35:
+        case 33:
           if (!adminData) {
-            _context.next = 38;
+            _context.next = 36;
             break;
           }
           window.location.href = 'admin_dashboard.html';
           return _context.abrupt("return");
-        case 38:
+        case 36:
           throw new Error('Login failed: User role not determined');
-        case 41:
-          _context.prev = 41;
+        case 39:
+          _context.prev = 39;
           _context.t0 = _context["catch"](3);
           console.error('Login process error:', _context.t0);
           alert(_context.t0.message);
-        case 45:
+        case 43:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[3, 41]]);
+    }, _callee, null, [[3, 39]]);
   }));
   return function (_x) {
     return _ref.apply(this, arguments);
@@ -8984,7 +8983,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54248" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50238" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
