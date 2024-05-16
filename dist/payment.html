@@ -10,6 +10,7 @@
     <div class="dashboard-container">
         <h1>Payment Information</h1>
         <form id="paymentForm">
+            <p id="totalPriceDisplay">Total Price: <span></span> Saudi Riyals</p>
             <label for="creditCardNumber">Credit Card Number:</label>
             <input type="text" id="creditCardNumber" placeholder="Card Number">
 
@@ -27,8 +28,9 @@
                 </div>
             </div>
 
-            <button type="submit" class="confirm-payment">Confirm Payment</button>
-            <button type="button" class="cancel-payment">Cancel Payment</button>
+            <button type="submit" id="confirmButton" class="confirm-payment">Confirm Payment</button>
+            <button type="button" id="cancelButton" class="cancel-payment">Cancel Payment</button>
+            
         </form>
     </div>
 

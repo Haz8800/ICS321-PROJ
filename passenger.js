@@ -185,19 +185,39 @@ async function handleReservation() {
         return;
     }
 
-    const { data, error } = await supabase
+ 
+    const { error: insertError } = await supabase
         .from('Ticket')
         .insert([
             { User_ID: userID, TicketStatus: 1, SeatID: seatID, Flight_ID: flightData.Flight_ID }
         ]);
 
-    if (error) {
-        console.error('Error making reservation:', error);
+    if (insertError) {
+        console.error('Error making reservation:', insertError);
         alert('Reservation failed. Please try again.');
         return;
-    } else {
-        alert('Reservation successful! Click OK to proceed to payment.');
-        
-        window.location.href = 'payment.html'; 
     }
+
+ 
+    const { data: ticketData, error: retrieveError } = await supabase
+        .from('Ticket')
+        .select('Ticket_ID')
+        .eq('User_ID', userID)
+        .eq('SeatID', seatID)
+        .eq('Flight_ID', flightData.Flight_ID)
+        .order('Ticket_ID', { ascending: false })
+        .limit(1);
+
+    if (retrieveError || !ticketData.length) {
+        console.error('Error retrieving Ticket_ID:', retrieveError);
+        alert('Failed to retrieve Ticket ID. Please try again.');
+        return;
+    }
+
+    const ticketID = ticketData[0].Ticket_ID;
+    sessionStorage.setItem('reservedTicketId', ticketID);
+
+    alert('Reservation successful! Click OK to proceed to payment.');
+    window.location.href = 'payment.html';
 }
+

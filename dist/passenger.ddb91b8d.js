@@ -9153,7 +9153,7 @@ function handleReservation() {
 }
 function _handleReservation() {
   _handleReservation = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
-    var takeoffCity, arrivalCity, takeoffTime, takeoffDate, seatID, userID, _yield$supabase$from$7, flightData, flightError, _yield$supabase$from$8, data, error;
+    var takeoffCity, arrivalCity, takeoffTime, takeoffDate, seatID, userID, _yield$supabase$from$7, flightData, flightError, _yield$supabase$from$8, insertError, _yield$supabase$from$9, ticketData, retrieveError, ticketID;
     return _regeneratorRuntime().wrap(function _callee7$(_context7) {
       while (1) switch (_context7.prev = _context7.next) {
         case 0:
@@ -9187,20 +9187,36 @@ function _handleReservation() {
           }]);
         case 18:
           _yield$supabase$from$8 = _context7.sent;
-          data = _yield$supabase$from$8.data;
-          error = _yield$supabase$from$8.error;
-          if (!error) {
-            _context7.next = 27;
+          insertError = _yield$supabase$from$8.error;
+          if (!insertError) {
+            _context7.next = 24;
             break;
           }
-          console.error('Error making reservation:', error);
+          console.error('Error making reservation:', insertError);
           alert('Reservation failed. Please try again.');
           return _context7.abrupt("return");
-        case 27:
+        case 24:
+          _context7.next = 26;
+          return supabase.from('Ticket').select('Ticket_ID').eq('User_ID', userID).eq('SeatID', seatID).eq('Flight_ID', flightData.Flight_ID).order('Ticket_ID', {
+            ascending: false
+          }).limit(1);
+        case 26:
+          _yield$supabase$from$9 = _context7.sent;
+          ticketData = _yield$supabase$from$9.data;
+          retrieveError = _yield$supabase$from$9.error;
+          if (!(retrieveError || !ticketData.length)) {
+            _context7.next = 33;
+            break;
+          }
+          console.error('Error retrieving Ticket_ID:', retrieveError);
+          alert('Failed to retrieve Ticket ID. Please try again.');
+          return _context7.abrupt("return");
+        case 33:
+          ticketID = ticketData[0].Ticket_ID;
+          sessionStorage.setItem('reservedTicketId', ticketID);
           alert('Reservation successful! Click OK to proceed to payment.');
-          // Redirect to the payment page
-          window.location.href = 'payment.html'; // Replace 'payment.html' with your actual payment page URL
-        case 29:
+          window.location.href = 'payment.html';
+        case 37:
         case "end":
           return _context7.stop();
       }
@@ -9233,7 +9249,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54330" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54817" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
