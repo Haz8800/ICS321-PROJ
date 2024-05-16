@@ -8861,301 +8861,352 @@ module.exports = {
   supabase: supabase
 };
 },{"@supabase/supabase-js":"node_modules/@supabase/supabase-js/dist/module/index.js"}],"passenger.js":[function(require,module,exports) {
+var define;
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator.return && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, catch: function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var _require = require('./supabaseClient'),
   supabase = _require.supabase;
-document.addEventListener('DOMContentLoaded', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-  var userId;
-  return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-    while (1) switch (_context5.prev = _context5.next) {
-      case 0:
-        _context5.next = 2;
-        return getUserId();
-      case 2:
-        userId = _context5.sent;
-        _context5.next = 5;
-        return loadCities();
-      case 5:
-        loadUserTickets(userId);
-        document.getElementById('takeOffCity').addEventListener('change', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-          return _regeneratorRuntime().wrap(function _callee$(_context) {
-            while (1) switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return updateArrivalCities(this.value);
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }, _callee, this);
-        })));
-        document.getElementById('arrivalCity').addEventListener('change', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-          var takeOffCity;
-          return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-            while (1) switch (_context2.prev = _context2.next) {
-              case 0:
-                takeOffCity = document.getElementById('takeOffCity').value;
-                _context2.next = 3;
-                return updateFlightDates(takeOffCity, this.value);
-              case 3:
-              case "end":
-                return _context2.stop();
-            }
-          }, _callee2, this);
-        })));
-        document.getElementById('reserveButton').addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-          return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-            while (1) switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return handleReservation(userId);
-              case 2:
-              case "end":
-                return _context3.stop();
-            }
-          }, _callee3);
-        })));
-        document.getElementById('updateTicketButton').addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-          return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-            while (1) switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return updateTicket(userId);
-              case 2:
-              case "end":
-                return _context4.stop();
-            }
-          }, _callee4);
-        })));
-      case 10:
-      case "end":
-        return _context5.stop();
-    }
-  }, _callee5);
-})));
-function getUserId() {
-  return _getUserId.apply(this, arguments);
+function debounce(func, wait) {
+  var timeout;
+  return function () {
+    var context = this,
+      args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      return func.apply(context, args);
+    }, wait);
+  };
 }
-function _getUserId() {
-  _getUserId = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+function init() {
+  console.log('Initialization started');
+  loadTakeOffCities();
+  loadSeats();
+  var takeOffCitySelect = document.getElementById('takeOffCity');
+  var arrivalCitySelect = document.getElementById('arrivalCity');
+  takeOffCitySelect.addEventListener('change', debounce(function () {
+    var city = takeOffCitySelect.value;
+    if (city) {
+      console.log("Loading arrival cities for take-off city: ".concat(city));
+      loadArrivalCities(city);
+    }
+  }, 300));
+  arrivalCitySelect.addEventListener('change', debounce(function () {
+    var takeoffCity = takeOffCitySelect.value;
+    var arrivalCity = arrivalCitySelect.value;
+    if (takeoffCity && arrivalCity) {
+      console.log("Loading take-off times and dates for ".concat(takeoffCity, " to ").concat(arrivalCity));
+      loadTakeOffTimes(takeoffCity, arrivalCity);
+      loadTakeOffDates(takeoffCity, arrivalCity);
+    }
+  }, 300));
+  document.getElementById('reserveButton').addEventListener('click', /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            e.preventDefault();
+            console.log("Processing reservation...");
+            _context.next = 4;
+            return handleReservation();
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }());
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+function loadTakeOffCities() {
+  return _loadTakeOffCities.apply(this, arguments);
+}
+function _loadTakeOffCities() {
+  _loadTakeOffCities = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var _yield$supabase$from$, data, error, takeoffCitySelect, uniqueCities;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          console.log('Fetching take-off cities');
+          _context2.next = 3;
+          return supabase.from('Flight').select('TakeoffCity');
+        case 3:
+          _yield$supabase$from$ = _context2.sent;
+          data = _yield$supabase$from$.data;
+          error = _yield$supabase$from$.error;
+          if (!error) {
+            _context2.next = 9;
+            break;
+          }
+          console.error('Error fetching takeoff cities:', error);
+          return _context2.abrupt("return");
+        case 9:
+          takeoffCitySelect = document.getElementById('takeOffCity');
+          takeoffCitySelect.innerHTML = '<option value="">Select Take-off City</option>';
+          uniqueCities = new Set(data.map(function (item) {
+            return item.TakeoffCity;
+          }));
+          uniqueCities.forEach(function (city) {
+            var option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            takeoffCitySelect.appendChild(option);
+          });
+          console.log('Takeoff cities loaded:', Array.from(uniqueCities));
+        case 14:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+  return _loadTakeOffCities.apply(this, arguments);
+}
+function loadArrivalCities(_x2) {
+  return _loadArrivalCities.apply(this, arguments);
+}
+function _loadArrivalCities() {
+  _loadArrivalCities = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(takeoffCity) {
+    var _yield$supabase$from$2, data, error, arrivalCitySelect, uniqueCities;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          console.log("Fetching arrival cities for ".concat(takeoffCity));
+          _context3.next = 3;
+          return supabase.from('Flight').select('ArrivalCity').eq('TakeoffCity', takeoffCity);
+        case 3:
+          _yield$supabase$from$2 = _context3.sent;
+          data = _yield$supabase$from$2.data;
+          error = _yield$supabase$from$2.error;
+          if (!error) {
+            _context3.next = 9;
+            break;
+          }
+          console.error('Error fetching arrival cities:', error);
+          return _context3.abrupt("return");
+        case 9:
+          arrivalCitySelect = document.getElementById('arrivalCity');
+          arrivalCitySelect.innerHTML = '<option value="">Select Arrival City</option>';
+          uniqueCities = new Set(data.map(function (item) {
+            return item.ArrivalCity;
+          }));
+          uniqueCities.forEach(function (city) {
+            var option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            arrivalCitySelect.appendChild(option);
+          });
+          console.log('Arrival cities loaded:', Array.from(uniqueCities));
+        case 14:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+  return _loadArrivalCities.apply(this, arguments);
+}
+function loadTakeOffTimes(_x3, _x4) {
+  return _loadTakeOffTimes.apply(this, arguments);
+}
+function _loadTakeOffTimes() {
+  _loadTakeOffTimes = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(takeoffCity, arrivalCity) {
+    var _yield$supabase$from$3, data, error, takeoffTimeSelect;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          console.log("Fetching take-off times for ".concat(takeoffCity, " to ").concat(arrivalCity));
+          _context4.next = 3;
+          return supabase.from('Flight').select('TakeoffTime').eq('TakeoffCity', takeoffCity).eq('ArrivalCity', arrivalCity);
+        case 3:
+          _yield$supabase$from$3 = _context4.sent;
+          data = _yield$supabase$from$3.data;
+          error = _yield$supabase$from$3.error;
+          if (!error) {
+            _context4.next = 9;
+            break;
+          }
+          console.error('Error fetching takeoff times:', error);
+          return _context4.abrupt("return");
+        case 9:
+          takeoffTimeSelect = document.getElementById('takeOffTime');
+          takeoffTimeSelect.innerHTML = '<option value="">Select Take-off Time</option>';
+          data.forEach(function (time) {
+            var option = document.createElement('option');
+            option.value = time.TakeoffTime;
+            option.textContent = time.TakeoffTime;
+            takeoffTimeSelect.appendChild(option);
+          });
+          console.log('Takeoff times loaded:', data);
+        case 13:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+  return _loadTakeOffTimes.apply(this, arguments);
+}
+function loadTakeOffDates(_x5, _x6) {
+  return _loadTakeOffDates.apply(this, arguments);
+}
+function _loadTakeOffDates() {
+  _loadTakeOffDates = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(takeoffCity, arrivalCity) {
+    var _yield$supabase$from$4, flightData, flightError, flightIDs, _yield$supabase$from$5, dateData, dateError, takeoffDateSelect;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          console.log("Fetching take-off dates for flights from ".concat(takeoffCity, " to ").concat(arrivalCity));
+          _context5.next = 3;
+          return supabase.from('Flight').select('Flight_ID').eq('TakeoffCity', takeoffCity).eq('ArrivalCity', arrivalCity);
+        case 3:
+          _yield$supabase$from$4 = _context5.sent;
+          flightData = _yield$supabase$from$4.data;
+          flightError = _yield$supabase$from$4.error;
+          if (!flightError) {
+            _context5.next = 9;
+            break;
+          }
+          console.error('Error fetching Flight_ID:', flightError);
+          return _context5.abrupt("return");
+        case 9:
+          flightIDs = flightData.map(function (flight) {
+            return flight.Flight_ID;
+          });
+          _context5.next = 12;
+          return supabase.from('Flight_Date').select('Date').in('Flight_ID', flightIDs);
+        case 12:
+          _yield$supabase$from$5 = _context5.sent;
+          dateData = _yield$supabase$from$5.data;
+          dateError = _yield$supabase$from$5.error;
+          if (!dateError) {
+            _context5.next = 18;
+            break;
+          }
+          console.error('Error fetching Takeoff Dates:', dateError);
+          return _context5.abrupt("return");
+        case 18:
+          takeoffDateSelect = document.getElementById('takeOffDate');
+          takeoffDateSelect.innerHTML = '<option value="">Select Date</option>';
+          dateData.forEach(function (date) {
+            var option = document.createElement('option');
+            option.value = date.Date;
+            option.textContent = new Date(date.Date).toLocaleDateString();
+            takeoffDateSelect.appendChild(option);
+          });
+          console.log('Takeoff dates loaded:', dateData);
+        case 22:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5);
+  }));
+  return _loadTakeOffDates.apply(this, arguments);
+}
+function loadSeats() {
+  return _loadSeats.apply(this, arguments);
+}
+function _loadSeats() {
+  _loadSeats = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+    var _yield$supabase$from$6, data, error, seatSelect;
     return _regeneratorRuntime().wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
-          return _context6.abrupt("return", sessionStorage.getItem('userId'));
-        case 1:
+          console.log('Fetching available seats');
+          _context6.next = 3;
+          return supabase.from('seats').select('seatid');
+        case 3:
+          _yield$supabase$from$6 = _context6.sent;
+          data = _yield$supabase$from$6.data;
+          error = _yield$supabase$from$6.error;
+          if (!error) {
+            _context6.next = 9;
+            break;
+          }
+          console.error('Error fetching seats:', error);
+          return _context6.abrupt("return");
+        case 9:
+          seatSelect = document.getElementById('seatSelect');
+          seatSelect.innerHTML = '<option value="">Select Seat</option>';
+          data.forEach(function (seat) {
+            var option = document.createElement('option');
+            option.value = seat.seatid;
+            option.textContent = seat.seatid;
+            seatSelect.appendChild(option);
+          });
+          console.log('Seats loaded and added to dropdown successfully.');
+        case 13:
         case "end":
           return _context6.stop();
       }
     }, _callee6);
   }));
-  return _getUserId.apply(this, arguments);
+  return _loadSeats.apply(this, arguments);
 }
-function loadCities() {
-  return _loadCities.apply(this, arguments);
+function handleReservation() {
+  return _handleReservation.apply(this, arguments);
 }
-function _loadCities() {
-  _loadCities = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
-    var _yield$supabase$from$, data, error;
+function _handleReservation() {
+  _handleReservation = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+    var takeoffCity, arrivalCity, takeoffTime, takeoffDate, seatID, userID, _yield$supabase$from$7, flightData, flightError, _yield$supabase$from$8, data, error;
     return _regeneratorRuntime().wrap(function _callee7$(_context7) {
       while (1) switch (_context7.prev = _context7.next) {
         case 0:
-          _context7.next = 2;
-          return supabase.from('flights').select('distinct takeOffCity');
-        case 2:
-          _yield$supabase$from$ = _context7.sent;
-          data = _yield$supabase$from$.data;
-          error = _yield$supabase$from$.error;
-          if (error) console.error('Error loading take-off cities:', error);else populateDropdown('takeOffCity', data.map(function (city) {
-            return city.takeOffCity;
-          }));
-        case 6:
+          takeoffCity = document.getElementById('takeOffCity').value;
+          arrivalCity = document.getElementById('arrivalCity').value;
+          takeoffTime = document.getElementById('takeOffTime').value;
+          takeoffDate = document.getElementById('takeOffDate').value;
+          seatID = document.getElementById('seatSelect').value;
+          userID = sessionStorage.getItem('userId');
+          console.log('Starting reservation process');
+          _context7.next = 9;
+          return supabase.from('Flight').select('Flight_ID').eq('TakeoffCity', takeoffCity).eq('ArrivalCity', arrivalCity).eq('TakeoffTime', takeoffTime).single();
+        case 9:
+          _yield$supabase$from$7 = _context7.sent;
+          flightData = _yield$supabase$from$7.data;
+          flightError = _yield$supabase$from$7.error;
+          if (!flightError) {
+            _context7.next = 16;
+            break;
+          }
+          console.error('Error fetching flight ID:', flightError);
+          alert('Error in fetching flight details. Please try again.');
+          return _context7.abrupt("return");
+        case 16:
+          _context7.next = 18;
+          return supabase.from('Ticket').insert([{
+            User_ID: userID,
+            TicketStatus: 1,
+            SeatID: seatID,
+            Flight_ID: flightData.Flight_ID
+          }]);
+        case 18:
+          _yield$supabase$from$8 = _context7.sent;
+          data = _yield$supabase$from$8.data;
+          error = _yield$supabase$from$8.error;
+          if (!error) {
+            _context7.next = 27;
+            break;
+          }
+          console.error('Error making reservation:', error);
+          alert('Reservation failed. Please try again.');
+          return _context7.abrupt("return");
+        case 27:
+          alert('Reservation successful! Click OK to proceed to payment.');
+          // Redirect to the payment page
+          window.location.href = 'payment.html'; // Replace 'payment.html' with your actual payment page URL
+        case 29:
         case "end":
           return _context7.stop();
       }
     }, _callee7);
   }));
-  return _loadCities.apply(this, arguments);
-}
-function updateArrivalCities(_x) {
-  return _updateArrivalCities.apply(this, arguments);
-}
-function _updateArrivalCities() {
-  _updateArrivalCities = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(takeOffCity) {
-    var _yield$supabase$from$2, data, error;
-    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-      while (1) switch (_context8.prev = _context8.next) {
-        case 0:
-          _context8.next = 2;
-          return supabase.from('flights').select('arrivalCity').eq('takeOffCity', takeOffCity);
-        case 2:
-          _yield$supabase$from$2 = _context8.sent;
-          data = _yield$supabase$from$2.data;
-          error = _yield$supabase$from$2.error;
-          if (error) console.error('Error loading arrival cities:', error);else populateDropdown('arrivalCity', data.map(function (city) {
-            return city.arrivalCity;
-          }));
-        case 6:
-        case "end":
-          return _context8.stop();
-      }
-    }, _callee8);
-  }));
-  return _updateArrivalCities.apply(this, arguments);
-}
-function updateFlightDates(_x2, _x3) {
-  return _updateFlightDates.apply(this, arguments);
-}
-function _updateFlightDates() {
-  _updateFlightDates = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(takeOffCity, arrivalCity) {
-    var _yield$supabase$from$3, data, error, flightIds, _yield$supabase$from$4, datesData, datesError;
-    return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-      while (1) switch (_context9.prev = _context9.next) {
-        case 0:
-          _context9.next = 2;
-          return supabase.from('flights').select('Flight_ID').eq('takeOffCity', takeOffCity).eq('arrivalCity', arrivalCity);
-        case 2:
-          _yield$supabase$from$3 = _context9.sent;
-          data = _yield$supabase$from$3.data;
-          error = _yield$supabase$from$3.error;
-          if (!error) {
-            _context9.next = 9;
-            break;
-          }
-          console.error('Error fetching flights:', error);
-          _context9.next = 16;
-          break;
-        case 9:
-          flightIds = data.map(function (flight) {
-            return flight.Flight_ID;
-          });
-          _context9.next = 12;
-          return supabase.from('Flight_Date').select('Date').in('Flight_ID', flightIds);
-        case 12:
-          _yield$supabase$from$4 = _context9.sent;
-          datesData = _yield$supabase$from$4.data;
-          datesError = _yield$supabase$from$4.error;
-          if (datesError) console.error('Error loading flight dates:', datesError);else populateDropdown('takeOffDate', datesData.map(function (date) {
-            return date.Date;
-          }));
-        case 16:
-        case "end":
-          return _context9.stop();
-      }
-    }, _callee9);
-  }));
-  return _updateFlightDates.apply(this, arguments);
-}
-function handleReservation(_x4) {
   return _handleReservation.apply(this, arguments);
-}
-function _handleReservation() {
-  _handleReservation = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10(userId) {
-    var takeOffCity, arrivalCity, takeOffDate, seat, _yield$supabase$from$5, data, error;
-    return _regeneratorRuntime().wrap(function _callee10$(_context10) {
-      while (1) switch (_context10.prev = _context10.next) {
-        case 0:
-          takeOffCity = document.getElementById('takeOffCity').value;
-          arrivalCity = document.getElementById('arrivalCity').value;
-          takeOffDate = document.getElementById('takeOffDate').value;
-          seat = document.getElementById('seatSelect').value;
-          _context10.next = 6;
-          return supabase.from('Ticket').insert([{
-            User_ID: userId,
-            Flight_ID: takeOffCity,
-            SeatID: seat,
-            TicketStatus: 1
-          } // Placeholder for Flight_ID and TicketStatus
-          ]);
-        case 6:
-          _yield$supabase$from$5 = _context10.sent;
-          data = _yield$supabase$from$5.data;
-          error = _yield$supabase$from$5.error;
-          if (error) {
-            console.error('Reservation failed:', error);
-            alert('Failed to reserve ticket.');
-          } else {
-            window.location.href = '/payment.html'; // Redirect to the payment page
-          }
-        case 10:
-        case "end":
-          return _context10.stop();
-      }
-    }, _callee10);
-  }));
-  return _handleReservation.apply(this, arguments);
-}
-function loadUserTickets(_x5) {
-  return _loadUserTickets.apply(this, arguments);
-}
-function _loadUserTickets() {
-  _loadUserTickets = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11(userId) {
-    var _yield$supabase$from$6, data, error;
-    return _regeneratorRuntime().wrap(function _callee11$(_context11) {
-      while (1) switch (_context11.prev = _context11.next) {
-        case 0:
-          _context11.next = 2;
-          return supabase.from('Ticket').select('*').eq('User_ID', userId);
-        case 2:
-          _yield$supabase$from$6 = _context11.sent;
-          data = _yield$supabase$from$6.data;
-          error = _yield$supabase$from$6.error;
-          if (error) console.error('Error loading user tickets:', error);else populateDropdown('userTicketsSelect', data.map(function (ticket) {
-            return "".concat(ticket.Flight_ID, " - ").concat(ticket.SeatID);
-          }));
-        case 6:
-        case "end":
-          return _context11.stop();
-      }
-    }, _callee11);
-  }));
-  return _loadUserTickets.apply(this, arguments);
-}
-function updateTicket(_x6) {
-  return _updateTicket.apply(this, arguments);
-}
-function _updateTicket() {
-  _updateTicket = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee12(userId) {
-    var ticketInfo, flightId, seatId, newSeatId, _yield$supabase$from$7, error;
-    return _regeneratorRuntime().wrap(function _callee12$(_context12) {
-      while (1) switch (_context12.prev = _context12.next) {
-        case 0:
-          ticketInfo = document.getElementById('userTicketsSelect').value.split(' - ');
-          flightId = ticketInfo[0];
-          seatId = ticketInfo[1];
-          newSeatId = document.getElementById('updateSeatSelect').value;
-          _context12.next = 6;
-          return supabase.from('Ticket').update({
-            SeatID: newSeatId
-          }).match({
-            User_ID: userId,
-            Flight_ID: flightId,
-            SeatID: seatId
-          });
-        case 6:
-          _yield$supabase$from$7 = _context12.sent;
-          error = _yield$supabase$from$7.error;
-          if (error) {
-            console.error('Failed to update ticket:', error);
-            alert('Failed to update ticket.');
-          } else {
-            alert('Ticket updated successfully!');
-          }
-        case 9:
-        case "end":
-          return _context12.stop();
-      }
-    }, _callee12);
-  }));
-  return _updateTicket.apply(this, arguments);
-}
-function populateDropdown(dropdownId, options) {
-  var select = document.getElementById(dropdownId);
-  select.innerHTML = options.map(function (option) {
-    return "<option value=\"".concat(option, "\">").concat(option, "</option>");
-  }).join('');
 }
 },{"./supabaseClient":"supabaseClient.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -9182,7 +9233,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50373" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54330" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

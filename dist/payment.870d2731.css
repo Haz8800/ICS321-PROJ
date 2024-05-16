@@ -60,19 +60,19 @@ button:hover {
 }
 
 .confirm-payment {
-    background-color: #28a745; /* Green for confirmation */
+    background-color: #28a745; 
 }
 
 .confirm-payment:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838;
 }
 
 .cancel-payment {
-    background-color: #dc3545; /* Red for cancellation */
+    background-color: #dc3545; 
 }
 
 .cancel-payment:hover {
-    background-color: #c82333; /* Darker red on hover */
+    background-color: #c82333;
 }
 
 

@@ -9,7 +9,7 @@
     "parcel-bundler": "^1.12.5"
   },
   "scripts": {
-      "start": "parcel passenger_dashboard.html"
+      "start": "parcel mainpage.html"
 
   },
   "keywords": [],

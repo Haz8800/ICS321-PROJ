@@ -57,7 +57,7 @@ h2 {
     margin-bottom: 10px;
 }
 
-/* Labels and Form Elements */
+
 label {
     display: block;
     margin-top: 10px;
@@ -65,19 +65,19 @@ label {
 }
 
 input[type="text"]#ticketStatus {
-    width: 100%;  /* Ensures it matches the width of dropdowns */
-    padding: 8px; /* Aligns with the padding of select elements */
+    width: 100%;  
+    padding: 8px; 
     margin-top: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    background-color: #e9ecef; /* Gives a distinct background */
-    color: #495057; /* Ensures text is clearly visible */
-    cursor: not-allowed; /* Shows that the input is not editable */
-    display: block; /* Makes sure the input is not inline */
-    font-size: 16px; /* Matches font size of select elements */
+    background-color: #e9ecef; 
+    color: #495057; 
+    cursor: not-allowed; 
+    display: block; 
+    font-size: 16px; 
 }
 
-/* Make sure all select and input elements are styled uniformly */
+
 select, input[type="text"] {
     width: 100%;
     padding: 8px;
@@ -86,15 +86,15 @@ select, input[type="text"] {
     border: 1px solid #ccc;
 }
 
-/* Additional specific targeting to override any unwanted styles */
+
 input[type="text"].status-input {
-    background-color: #e9ecef; /* Consistent background color */
-    font-size: 16px; /* Consistent font size */
+    background-color: #e9ecef; 
+    font-size: 16px; 
 }
 
 
 
-/* Buttons Styling */
+
 button {
     background-color: #007bff;
     color: white;
@@ -104,7 +104,7 @@ button {
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
-    width: auto; /* Allows button width to fit content */
+    width: auto; 
 }
 
 button:hover {
@@ -113,14 +113,14 @@ button:hover {
 
 .cancel-button {
     background-color: #d9534f;
-    margin-left: 10px; /* Spacing between buttons */
+    margin-left: 10px; 
 }
 
 .cancel-button:hover {
     background-color: #c9302c;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .dashboard-container {
         padding: 10px;

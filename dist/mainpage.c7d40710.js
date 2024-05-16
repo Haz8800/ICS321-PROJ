@@ -8891,19 +8891,14 @@ document.getElementById('loginForm').addEventListener('submit', /*#__PURE__*/fun
           throw new Error('Login failed: ' + personError.message);
         case 11:
           console.log('Person data:', personData);
-
-          // Verifying password
           if (!(personData.password !== password)) {
             _context.next = 14;
             break;
           }
           throw new Error('Invalid password');
         case 14:
-          // Storing userId in session storage for further use
           sessionStorage.setItem('userId', personData.userid);
           console.log('User ID:', personData.userid);
-
-          // Determining if the user is a passenger
           _context.next = 18;
           return supabase.from('passenger').select('userid').eq('userid', personData.userid).maybeSingle();
         case 18:
@@ -8983,7 +8978,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50238" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54333" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
