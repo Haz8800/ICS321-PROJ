@@ -22,7 +22,7 @@ document.getElementById('insert-form').addEventListener('submit', async function
         }
 
         alert('Ticket inserted successfully!');
-        window.location.href = 'admin-dashboard.html'; 
+        window.location.href = 'ticket-insert.html'; 
     } catch (error) {
         console.error('Ticket insertion failed:', error.message || 'Unknown error');
         alert('Ticket insertion failed. Please try again.');
