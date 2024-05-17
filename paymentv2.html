@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Processing</title>
+    <link rel="stylesheet" href="paymentv2.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Payment Information</h1>
+        <form id="paymentForm">
+            <p id="totalPriceDisplay">Total Price: <span></span> Saudi Riyals</p>
+            <label for="creditCardNumber">Credit Card Number:</label>
+            <input type="text" id="creditCardNumber" placeholder="Card Number">
+
+            <label for="cardHolderName">Name on Card:</label>
+            <input type="text" id="cardHolderName" placeholder="Cardholder Name">
+
+            <div class="card-details">
+                <div class="expiry">
+                    <label for="expiryDate">Expiry Date:</label>
+                    <input type="text" id="expiryDate" placeholder="MM/YY">
+                </div>
+                <div class="cvv">
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" placeholder="CVV">
+                </div>
+            </div>
+
+            <button type="submit" id="confirmButton" class="confirm-payment">Confirm Payment</button>
+            <button type="button" id="cancelButton" class="cancel-payment">Cancel Payment</button>
+            
+        </form>
+    </div>
+
+    <script src="paymentv2.js"></script>
+</body>
+</html>

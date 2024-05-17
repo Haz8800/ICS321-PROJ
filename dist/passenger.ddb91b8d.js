@@ -8883,8 +8883,16 @@ function init() {
   console.log('Initialization started');
   loadTakeOffCities();
   loadSeats();
+  loadUserTickets(); // Ensures user tickets are loaded at initialization
+
   var takeOffCitySelect = document.getElementById('takeOffCity');
   var arrivalCitySelect = document.getElementById('arrivalCity');
+  var userTicketsSelect = document.getElementById('userTicketsSelect');
+  var updateTicketButton = document.getElementById('updateTicketButton');
+  var ticketDateSelect = document.getElementById('ticketDate'); // Get the date select element
+  var cancelTicketButton = document.getElementById('cancelTicketButton');
+  ticketDateSelect.innerHTML = '<option value="">Select a Date</option>'; // Initialize with 'Select a Date' option
+
   takeOffCitySelect.addEventListener('change', debounce(function () {
     var city = takeOffCitySelect.value;
     if (city) {
@@ -8901,23 +8909,43 @@ function init() {
       loadTakeOffDates(takeoffCity, arrivalCity);
     }
   }, 300));
+  userTicketsSelect.addEventListener('change', function () {
+    var ticketId = this.value;
+    if (ticketId) {
+      console.log("Loading details for ticket ID: ".concat(ticketId));
+      loadTicketDetails(ticketId);
+    }
+  });
+  updateTicketButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return updateTicket();
+        case 2:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  })));
+  cancelTicketButton.addEventListener('click', handleCancelTicket);
   document.getElementById('reserveButton').addEventListener('click', /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
-      return _regeneratorRuntime().wrap(function _callee$(_context) {
-        while (1) switch (_context.prev = _context.next) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
           case 0:
             e.preventDefault();
             console.log("Processing reservation...");
-            _context.next = 4;
+            _context2.next = 4;
             return handleReservation();
           case 4:
           case "end":
-            return _context.stop();
+            return _context2.stop();
         }
-      }, _callee);
+      }, _callee2);
     }));
     return function (_x) {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }());
 }
@@ -8930,24 +8958,24 @@ function loadTakeOffCities() {
   return _loadTakeOffCities.apply(this, arguments);
 }
 function _loadTakeOffCities() {
-  _loadTakeOffCities = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  _loadTakeOffCities = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
     var _yield$supabase$from$, data, error, takeoffCitySelect, uniqueCities;
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
         case 0:
           console.log('Fetching take-off cities');
-          _context2.next = 3;
+          _context3.next = 3;
           return supabase.from('Flight').select('TakeoffCity');
         case 3:
-          _yield$supabase$from$ = _context2.sent;
+          _yield$supabase$from$ = _context3.sent;
           data = _yield$supabase$from$.data;
           error = _yield$supabase$from$.error;
           if (!error) {
-            _context2.next = 9;
+            _context3.next = 9;
             break;
           }
           console.error('Error fetching takeoff cities:', error);
-          return _context2.abrupt("return");
+          return _context3.abrupt("return");
         case 9:
           takeoffCitySelect = document.getElementById('takeOffCity');
           takeoffCitySelect.innerHTML = '<option value="">Select Take-off City</option>';
@@ -8963,9 +8991,9 @@ function _loadTakeOffCities() {
           console.log('Takeoff cities loaded:', Array.from(uniqueCities));
         case 14:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
-    }, _callee2);
+    }, _callee3);
   }));
   return _loadTakeOffCities.apply(this, arguments);
 }
@@ -8973,24 +9001,24 @@ function loadArrivalCities(_x2) {
   return _loadArrivalCities.apply(this, arguments);
 }
 function _loadArrivalCities() {
-  _loadArrivalCities = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(takeoffCity) {
+  _loadArrivalCities = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(takeoffCity) {
     var _yield$supabase$from$2, data, error, arrivalCitySelect, uniqueCities;
-    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-      while (1) switch (_context3.prev = _context3.next) {
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
         case 0:
           console.log("Fetching arrival cities for ".concat(takeoffCity));
-          _context3.next = 3;
+          _context4.next = 3;
           return supabase.from('Flight').select('ArrivalCity').eq('TakeoffCity', takeoffCity);
         case 3:
-          _yield$supabase$from$2 = _context3.sent;
+          _yield$supabase$from$2 = _context4.sent;
           data = _yield$supabase$from$2.data;
           error = _yield$supabase$from$2.error;
           if (!error) {
-            _context3.next = 9;
+            _context4.next = 9;
             break;
           }
           console.error('Error fetching arrival cities:', error);
-          return _context3.abrupt("return");
+          return _context4.abrupt("return");
         case 9:
           arrivalCitySelect = document.getElementById('arrivalCity');
           arrivalCitySelect.innerHTML = '<option value="">Select Arrival City</option>';
@@ -9006,9 +9034,9 @@ function _loadArrivalCities() {
           console.log('Arrival cities loaded:', Array.from(uniqueCities));
         case 14:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
-    }, _callee3);
+    }, _callee4);
   }));
   return _loadArrivalCities.apply(this, arguments);
 }
@@ -9016,24 +9044,24 @@ function loadTakeOffTimes(_x3, _x4) {
   return _loadTakeOffTimes.apply(this, arguments);
 }
 function _loadTakeOffTimes() {
-  _loadTakeOffTimes = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(takeoffCity, arrivalCity) {
+  _loadTakeOffTimes = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(takeoffCity, arrivalCity) {
     var _yield$supabase$from$3, data, error, takeoffTimeSelect;
-    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-      while (1) switch (_context4.prev = _context4.next) {
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
         case 0:
           console.log("Fetching take-off times for ".concat(takeoffCity, " to ").concat(arrivalCity));
-          _context4.next = 3;
+          _context5.next = 3;
           return supabase.from('Flight').select('TakeoffTime').eq('TakeoffCity', takeoffCity).eq('ArrivalCity', arrivalCity);
         case 3:
-          _yield$supabase$from$3 = _context4.sent;
+          _yield$supabase$from$3 = _context5.sent;
           data = _yield$supabase$from$3.data;
           error = _yield$supabase$from$3.error;
           if (!error) {
-            _context4.next = 9;
+            _context5.next = 9;
             break;
           }
           console.error('Error fetching takeoff times:', error);
-          return _context4.abrupt("return");
+          return _context5.abrupt("return");
         case 9:
           takeoffTimeSelect = document.getElementById('takeOffTime');
           takeoffTimeSelect.innerHTML = '<option value="">Select Take-off Time</option>';
@@ -9046,9 +9074,9 @@ function _loadTakeOffTimes() {
           console.log('Takeoff times loaded:', data);
         case 13:
         case "end":
-          return _context4.stop();
+          return _context5.stop();
       }
-    }, _callee4);
+    }, _callee5);
   }));
   return _loadTakeOffTimes.apply(this, arguments);
 }
@@ -9056,40 +9084,40 @@ function loadTakeOffDates(_x5, _x6) {
   return _loadTakeOffDates.apply(this, arguments);
 }
 function _loadTakeOffDates() {
-  _loadTakeOffDates = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(takeoffCity, arrivalCity) {
+  _loadTakeOffDates = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(takeoffCity, arrivalCity) {
     var _yield$supabase$from$4, flightData, flightError, flightIDs, _yield$supabase$from$5, dateData, dateError, takeoffDateSelect;
-    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-      while (1) switch (_context5.prev = _context5.next) {
+    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
         case 0:
           console.log("Fetching take-off dates for flights from ".concat(takeoffCity, " to ").concat(arrivalCity));
-          _context5.next = 3;
+          _context6.next = 3;
           return supabase.from('Flight').select('Flight_ID').eq('TakeoffCity', takeoffCity).eq('ArrivalCity', arrivalCity);
         case 3:
-          _yield$supabase$from$4 = _context5.sent;
+          _yield$supabase$from$4 = _context6.sent;
           flightData = _yield$supabase$from$4.data;
           flightError = _yield$supabase$from$4.error;
           if (!flightError) {
-            _context5.next = 9;
+            _context6.next = 9;
             break;
           }
           console.error('Error fetching Flight_ID:', flightError);
-          return _context5.abrupt("return");
+          return _context6.abrupt("return");
         case 9:
           flightIDs = flightData.map(function (flight) {
             return flight.Flight_ID;
           });
-          _context5.next = 12;
+          _context6.next = 12;
           return supabase.from('Flight_Date').select('Date').in('Flight_ID', flightIDs);
         case 12:
-          _yield$supabase$from$5 = _context5.sent;
+          _yield$supabase$from$5 = _context6.sent;
           dateData = _yield$supabase$from$5.data;
           dateError = _yield$supabase$from$5.error;
           if (!dateError) {
-            _context5.next = 18;
+            _context6.next = 18;
             break;
           }
           console.error('Error fetching Takeoff Dates:', dateError);
-          return _context5.abrupt("return");
+          return _context6.abrupt("return");
         case 18:
           takeoffDateSelect = document.getElementById('takeOffDate');
           takeoffDateSelect.innerHTML = '<option value="">Select Date</option>';
@@ -9102,9 +9130,9 @@ function _loadTakeOffDates() {
           console.log('Takeoff dates loaded:', dateData);
         case 22:
         case "end":
-          return _context5.stop();
+          return _context6.stop();
       }
-    }, _callee5);
+    }, _callee6);
   }));
   return _loadTakeOffDates.apply(this, arguments);
 }
@@ -9112,24 +9140,24 @@ function loadSeats() {
   return _loadSeats.apply(this, arguments);
 }
 function _loadSeats() {
-  _loadSeats = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+  _loadSeats = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
     var _yield$supabase$from$6, data, error, seatSelect;
-    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-      while (1) switch (_context6.prev = _context6.next) {
+    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
         case 0:
           console.log('Fetching available seats');
-          _context6.next = 3;
+          _context7.next = 3;
           return supabase.from('seats').select('seatid');
         case 3:
-          _yield$supabase$from$6 = _context6.sent;
+          _yield$supabase$from$6 = _context7.sent;
           data = _yield$supabase$from$6.data;
           error = _yield$supabase$from$6.error;
           if (!error) {
-            _context6.next = 9;
+            _context7.next = 9;
             break;
           }
           console.error('Error fetching seats:', error);
-          return _context6.abrupt("return");
+          return _context7.abrupt("return");
         case 9:
           seatSelect = document.getElementById('seatSelect');
           seatSelect.innerHTML = '<option value="">Select Seat</option>';
@@ -9142,9 +9170,9 @@ function _loadSeats() {
           console.log('Seats loaded and added to dropdown successfully.');
         case 13:
         case "end":
-          return _context6.stop();
+          return _context7.stop();
       }
-    }, _callee6);
+    }, _callee7);
   }));
   return _loadSeats.apply(this, arguments);
 }
@@ -9152,10 +9180,10 @@ function handleReservation() {
   return _handleReservation.apply(this, arguments);
 }
 function _handleReservation() {
-  _handleReservation = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+  _handleReservation = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
     var takeoffCity, arrivalCity, takeoffTime, takeoffDate, seatID, userID, _yield$supabase$from$7, flightData, flightError, _yield$supabase$from$8, insertError, _yield$supabase$from$9, ticketData, retrieveError, ticketID;
-    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-      while (1) switch (_context7.prev = _context7.next) {
+    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
         case 0:
           takeoffCity = document.getElementById('takeOffCity').value;
           arrivalCity = document.getElementById('arrivalCity').value;
@@ -9164,21 +9192,21 @@ function _handleReservation() {
           seatID = document.getElementById('seatSelect').value;
           userID = sessionStorage.getItem('userId');
           console.log('Starting reservation process');
-          _context7.next = 9;
+          _context8.next = 9;
           return supabase.from('Flight').select('Flight_ID').eq('TakeoffCity', takeoffCity).eq('ArrivalCity', arrivalCity).eq('TakeoffTime', takeoffTime).single();
         case 9:
-          _yield$supabase$from$7 = _context7.sent;
+          _yield$supabase$from$7 = _context8.sent;
           flightData = _yield$supabase$from$7.data;
           flightError = _yield$supabase$from$7.error;
           if (!flightError) {
-            _context7.next = 16;
+            _context8.next = 16;
             break;
           }
           console.error('Error fetching flight ID:', flightError);
           alert('Error in fetching flight details. Please try again.');
-          return _context7.abrupt("return");
+          return _context8.abrupt("return");
         case 16:
-          _context7.next = 18;
+          _context8.next = 18;
           return supabase.from('Ticket').insert([{
             User_ID: userID,
             TicketStatus: 1,
@@ -9186,31 +9214,31 @@ function _handleReservation() {
             Flight_ID: flightData.Flight_ID
           }]);
         case 18:
-          _yield$supabase$from$8 = _context7.sent;
+          _yield$supabase$from$8 = _context8.sent;
           insertError = _yield$supabase$from$8.error;
           if (!insertError) {
-            _context7.next = 24;
+            _context8.next = 24;
             break;
           }
           console.error('Error making reservation:', insertError);
           alert('Reservation failed. Please try again.');
-          return _context7.abrupt("return");
+          return _context8.abrupt("return");
         case 24:
-          _context7.next = 26;
+          _context8.next = 26;
           return supabase.from('Ticket').select('Ticket_ID').eq('User_ID', userID).eq('SeatID', seatID).eq('Flight_ID', flightData.Flight_ID).order('Ticket_ID', {
             ascending: false
           }).limit(1);
         case 26:
-          _yield$supabase$from$9 = _context7.sent;
+          _yield$supabase$from$9 = _context8.sent;
           ticketData = _yield$supabase$from$9.data;
           retrieveError = _yield$supabase$from$9.error;
           if (!(retrieveError || !ticketData.length)) {
-            _context7.next = 33;
+            _context8.next = 33;
             break;
           }
           console.error('Error retrieving Ticket_ID:', retrieveError);
           alert('Failed to retrieve Ticket ID. Please try again.');
-          return _context7.abrupt("return");
+          return _context8.abrupt("return");
         case 33:
           ticketID = ticketData[0].Ticket_ID;
           sessionStorage.setItem('reservedTicketId', ticketID);
@@ -9218,11 +9246,391 @@ function _handleReservation() {
           window.location.href = 'payment.html';
         case 37:
         case "end":
-          return _context7.stop();
+          return _context8.stop();
       }
-    }, _callee7);
+    }, _callee8);
   }));
   return _handleReservation.apply(this, arguments);
+}
+function loadUserTickets() {
+  return _loadUserTickets.apply(this, arguments);
+}
+function _loadUserTickets() {
+  _loadUserTickets = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
+    var userId, _yield$supabase$from$10, data, error, ticketSelect;
+    return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
+        case 0:
+          userId = sessionStorage.getItem('userId');
+          console.log("Loading tickets for user ID: ".concat(userId));
+          _context9.next = 4;
+          return supabase.from('Ticket').select('Ticket_ID').eq('User_ID', userId);
+        case 4:
+          _yield$supabase$from$10 = _context9.sent;
+          data = _yield$supabase$from$10.data;
+          error = _yield$supabase$from$10.error;
+          if (!error) {
+            _context9.next = 10;
+            break;
+          }
+          console.error('Error loading tickets:', error);
+          return _context9.abrupt("return");
+        case 10:
+          ticketSelect = document.getElementById('userTicketsSelect');
+          ticketSelect.innerHTML = '<option value="">Select a Ticket</option>'; // Added to prompt user selection
+          data.forEach(function (ticket) {
+            var option = document.createElement('option');
+            option.value = ticket.Ticket_ID;
+            option.textContent = "Ticket ID: ".concat(ticket.Ticket_ID);
+            ticketSelect.appendChild(option);
+          });
+          console.log('User tickets loaded:', data);
+        case 14:
+        case "end":
+          return _context9.stop();
+      }
+    }, _callee9);
+  }));
+  return _loadUserTickets.apply(this, arguments);
+}
+function loadTicketDetails(_x7) {
+  return _loadTicketDetails.apply(this, arguments);
+}
+function _loadTicketDetails() {
+  _loadTicketDetails = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10(ticketId) {
+    var _yield$supabase$from$11, data, error;
+    return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+      while (1) switch (_context10.prev = _context10.next) {
+        case 0:
+          sessionStorage.setItem('reservedTicket', ticketId);
+          _context10.next = 3;
+          return supabase.from('Ticket').select("\n            Flight_ID,\n            TicketStatus,\n            SeatID,\n            Flight:Flight_ID (TakeoffCity, ArrivalCity)  \n        ").eq('Ticket_ID', ticketId).single();
+        case 3:
+          _yield$supabase$from$11 = _context10.sent;
+          data = _yield$supabase$from$11.data;
+          error = _yield$supabase$from$11.error;
+          if (!error) {
+            _context10.next = 9;
+            break;
+          }
+          console.error('Error fetching ticket details:', error);
+          return _context10.abrupt("return");
+        case 9:
+          // Assuming loadTicketStatus and updateSeatSelection functions handle the fetched data correctly
+          loadTicketStatus(ticketId); // Load status using the Ticket_ID
+          loadTicketTime(data.Flight_ID); // Assuming this function is properly defined to fetch all times
+          updateSeatSelection(data.SeatID);
+
+          // Check if Flight details are available before calling loadTicketTime
+          if (data.Flight) {
+            loadTicketTime(data.Flight.TakeoffCity, data.Flight.ArrivalCity);
+          } else {
+            console.error('Flight details not available for the ticket');
+          }
+        case 13:
+        case "end":
+          return _context10.stop();
+      }
+    }, _callee10);
+  }));
+  return _loadTicketDetails.apply(this, arguments);
+}
+function loadTicketStatus(_x8) {
+  return _loadTicketStatus.apply(this, arguments);
+}
+function _loadTicketStatus() {
+  _loadTicketStatus = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11(ticketId) {
+    var _yield$supabase$from$12, ticketData, ticketError, _yield$supabase$from$13, statusData, statusError, statusDisplay;
+    return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+      while (1) switch (_context11.prev = _context11.next) {
+        case 0:
+          _context11.next = 2;
+          return supabase.from('Ticket').select('TicketStatus').eq('Ticket_ID', ticketId).single();
+        case 2:
+          _yield$supabase$from$12 = _context11.sent;
+          ticketData = _yield$supabase$from$12.data;
+          ticketError = _yield$supabase$from$12.error;
+          if (!ticketError) {
+            _context11.next = 8;
+            break;
+          }
+          console.error('Error fetching ticket status:', ticketError);
+          return _context11.abrupt("return");
+        case 8:
+          console.log('TicketStatus:', ticketData.TicketStatus); // Check what TicketStatus value is retrieved
+
+          // Now, fetch the StatusName from the TicketStatus table
+          _context11.next = 11;
+          return supabase.from('TicketStatus').select('StatusName').eq('Status_ID', ticketData.TicketStatus).single();
+        case 11:
+          _yield$supabase$from$13 = _context11.sent;
+          statusData = _yield$supabase$from$13.data;
+          statusError = _yield$supabase$from$13.error;
+          if (!statusError) {
+            _context11.next = 17;
+            break;
+          }
+          console.error('Error fetching status name:', statusError);
+          return _context11.abrupt("return");
+        case 17:
+          console.log('StatusName:', statusData.StatusName); // Check what StatusName value is retrieved
+          statusDisplay = document.getElementById('ticketStatus');
+          statusDisplay.value = statusData.StatusName; // Use .value for input fields
+          console.log('Status displayed in the element:', statusDisplay.value); // Confirm value is being set
+        case 21:
+        case "end":
+          return _context11.stop();
+      }
+    }, _callee11);
+  }));
+  return _loadTicketStatus.apply(this, arguments);
+}
+function loadTicketTime(_x9, _x10) {
+  return _loadTicketTime.apply(this, arguments);
+}
+function _loadTicketTime() {
+  _loadTicketTime = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee12(takeoffCity, arrivalCity) {
+    var _yield$supabase$from$14, data, error, timeSelect;
+    return _regeneratorRuntime().wrap(function _callee12$(_context12) {
+      while (1) switch (_context12.prev = _context12.next) {
+        case 0:
+          console.log("Fetching all available takeoff times for the route from ".concat(takeoffCity, " to ").concat(arrivalCity));
+          _context12.next = 3;
+          return supabase.from('Flight').select('TakeoffTime, Flight_ID') // Fetch Flight_ID along with TakeoffTime
+          .eq('TakeoffCity', takeoffCity).eq('ArrivalCity', arrivalCity);
+        case 3:
+          _yield$supabase$from$14 = _context12.sent;
+          data = _yield$supabase$from$14.data;
+          error = _yield$supabase$from$14.error;
+          if (!error) {
+            _context12.next = 9;
+            break;
+          }
+          console.error('Error fetching takeoff times:', error);
+          return _context12.abrupt("return");
+        case 9:
+          timeSelect = document.getElementById('ticketTime');
+          timeSelect.innerHTML = '<option value="">Select a Time</option>'; // Adds prompt to select
+
+          data.forEach(function (flight) {
+            var option = document.createElement('option');
+            option.value = flight.Flight_ID; // Store Flight_ID as the value
+            option.textContent = flight.TakeoffTime;
+            timeSelect.appendChild(option);
+          });
+
+          // Listen to changes on timeSelect to load dates
+          timeSelect.onchange = function () {
+            if (timeSelect.value) {
+              loadTicketDates(timeSelect.value);
+            }
+          };
+          console.log('All available takeoff times loaded:', data);
+        case 14:
+        case "end":
+          return _context12.stop();
+      }
+    }, _callee12);
+  }));
+  return _loadTicketTime.apply(this, arguments);
+}
+function loadTicketDates(_x11) {
+  return _loadTicketDates.apply(this, arguments);
+}
+function _loadTicketDates() {
+  _loadTicketDates = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee13(flightId) {
+    var _yield$supabase$from$15, data, error, dateSelect;
+    return _regeneratorRuntime().wrap(function _callee13$(_context13) {
+      while (1) switch (_context13.prev = _context13.next) {
+        case 0:
+          console.log("Fetching available dates for Flight_ID: ".concat(flightId));
+          _context13.next = 3;
+          return supabase.from('Flight_Date').select('Date').eq('Flight_ID', flightId);
+        case 3:
+          _yield$supabase$from$15 = _context13.sent;
+          data = _yield$supabase$from$15.data;
+          error = _yield$supabase$from$15.error;
+          if (!error) {
+            _context13.next = 9;
+            break;
+          }
+          console.error('Error fetching flight dates:', error);
+          return _context13.abrupt("return");
+        case 9:
+          dateSelect = document.getElementById('ticketDate');
+          dateSelect.innerHTML = '<option value="">Select a Date</option>'; // Adds prompt to select
+
+          data.forEach(function (date) {
+            var option = document.createElement('option');
+            option.value = date.Date;
+            option.textContent = new Date(date.Date).toLocaleDateString();
+            dateSelect.appendChild(option);
+          });
+          console.log('Available dates loaded for the selected flight:', data);
+        case 13:
+        case "end":
+          return _context13.stop();
+      }
+    }, _callee13);
+  }));
+  return _loadTicketDates.apply(this, arguments);
+}
+function updateSeatSelection(_x12) {
+  return _updateSeatSelection.apply(this, arguments);
+}
+function _updateSeatSelection() {
+  _updateSeatSelection = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee14(currentSeatId) {
+    var _yield$supabase$from$16, data, error, seatSelect;
+    return _regeneratorRuntime().wrap(function _callee14$(_context14) {
+      while (1) switch (_context14.prev = _context14.next) {
+        case 0:
+          console.log('Fetching available seats');
+          _context14.next = 3;
+          return supabase.from('seats').select('seatid');
+        case 3:
+          _yield$supabase$from$16 = _context14.sent;
+          data = _yield$supabase$from$16.data;
+          error = _yield$supabase$from$16.error;
+          if (!error) {
+            _context14.next = 9;
+            break;
+          }
+          console.error('Error fetching seats:', error);
+          return _context14.abrupt("return");
+        case 9:
+          seatSelect = document.getElementById('seatUpdateSelect');
+          seatSelect.innerHTML = ''; // Clear previous options
+
+          // Populate dropdown with all available seats
+          data.forEach(function (seat) {
+            var option = document.createElement('option');
+            option.value = seat.seatid;
+            option.textContent = seat.seatid;
+            seatSelect.appendChild(option);
+          });
+
+          // Set the current seat as selected in the dropdown
+          seatSelect.value = currentSeatId;
+          console.log('Seats loaded and current seat set.');
+        case 14:
+        case "end":
+          return _context14.stop();
+      }
+    }, _callee14);
+  }));
+  return _updateSeatSelection.apply(this, arguments);
+}
+function updateTicket() {
+  return _updateTicket.apply(this, arguments);
+}
+function _updateTicket() {
+  _updateTicket = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee15() {
+    var ticketId, selectedFlightId, newSeatId, _yield$supabase$from$17, currentTicketData, currentTicketError, newFlightId, _yield$supabase$from$18, flightData, flightError, _yield$supabase$from$19, updateError;
+    return _regeneratorRuntime().wrap(function _callee15$(_context15) {
+      while (1) switch (_context15.prev = _context15.next) {
+        case 0:
+          ticketId = document.getElementById('userTicketsSelect').value;
+          selectedFlightId = document.getElementById('ticketTime').value; // This should have the Flight_ID now
+          newSeatId = document.getElementById('seatUpdateSelect').value; // Check if the selected time corresponds to a new flight or the same flight
+          _context15.next = 5;
+          return supabase.from('Ticket').select("Flight_ID").eq('Ticket_ID', ticketId).single();
+        case 5:
+          _yield$supabase$from$17 = _context15.sent;
+          currentTicketData = _yield$supabase$from$17.data;
+          currentTicketError = _yield$supabase$from$17.error;
+          if (!currentTicketError) {
+            _context15.next = 12;
+            break;
+          }
+          console.error('Error fetching current ticket details:', currentTicketError);
+          alert('Failed to fetch current ticket details. Please try again.');
+          return _context15.abrupt("return");
+        case 12:
+          newFlightId = currentTicketData.Flight_ID; // Default to the current Flight_ID
+          // Check if the flight time has changed, which means we need a new Flight_ID
+          if (!(selectedFlightId !== currentTicketData.Flight_ID)) {
+            _context15.next = 24;
+            break;
+          }
+          _context15.next = 16;
+          return supabase.from('Flight').select('Flight_ID').eq('Flight_ID', selectedFlightId).single();
+        case 16:
+          _yield$supabase$from$18 = _context15.sent;
+          flightData = _yield$supabase$from$18.data;
+          flightError = _yield$supabase$from$18.error;
+          if (!(flightError || !flightData)) {
+            _context15.next = 23;
+            break;
+          }
+          console.error('Error fetching new Flight ID:', flightError);
+          alert('Failed to find a matching flight for the new time. Please try again.');
+          return _context15.abrupt("return");
+        case 23:
+          newFlightId = flightData.Flight_ID; // Update to the new Flight_ID if different
+        case 24:
+          _context15.next = 26;
+          return supabase.from('Ticket').update({
+            SeatID: newSeatId,
+            Flight_ID: newFlightId
+          }).match({
+            Ticket_ID: ticketId
+          });
+        case 26:
+          _yield$supabase$from$19 = _context15.sent;
+          updateError = _yield$supabase$from$19.error;
+          if (updateError) {
+            console.error('Error updating ticket:', updateError);
+            alert('Failed to update the ticket. Please try again.');
+          } else {
+            alert('Ticket updated successfully.');
+          }
+        case 29:
+        case "end":
+          return _context15.stop();
+      }
+    }, _callee15);
+  }));
+  return _updateTicket.apply(this, arguments);
+}
+function handleCancelTicket() {
+  return _handleCancelTicket.apply(this, arguments);
+}
+function _handleCancelTicket() {
+  _handleCancelTicket = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee16() {
+    var ticketId, _yield$supabase$from$20, error;
+    return _regeneratorRuntime().wrap(function _callee16$(_context16) {
+      while (1) switch (_context16.prev = _context16.next) {
+        case 0:
+          ticketId = document.getElementById('userTicketsSelect').value; // Get the ticket ID directly from the dropdown
+          if (ticketId) {
+            _context16.next = 4;
+            break;
+          }
+          alert("No ticket selected for cancellation.");
+          return _context16.abrupt("return");
+        case 4:
+          _context16.next = 6;
+          return supabase.from('Ticket').update({
+            TicketStatus: 3
+          }) // Assuming '3' represents a cancelled status
+          .eq('Ticket_ID', ticketId);
+        case 6:
+          _yield$supabase$from$20 = _context16.sent;
+          error = _yield$supabase$from$20.error;
+          if (error) {
+            console.error('Error cancelling ticket:', error);
+            alert('Failed to cancel the ticket. Please try again.');
+          } else {
+            alert('Ticket cancellation pending. You need to pay the cancellation fee.');
+            window.location.href = 'paymentv2.html'; // Redirect to the cancellation fee payment page
+          }
+        case 9:
+        case "end":
+          return _context16.stop();
+      }
+    }, _callee16);
+  }));
+  return _handleCancelTicket.apply(this, arguments);
 }
 },{"./supabaseClient":"supabaseClient.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -9249,7 +9657,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54817" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55189" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
