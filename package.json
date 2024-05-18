@@ -4,7 +4,7 @@
   },
   "name": "ics321-proj",
   "version": "1.0.0",
-  "main": "admin.js",
+  "main": "mainpage.html",
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
   },
